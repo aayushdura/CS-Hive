@@ -1,0 +1,25 @@
+const jwt = require("jsonwebtoken");
+const jwtSecret = "akgakg123";
+
+module.exports = function (req, res, next) {
+  var token;
+  if (req.header("x-access-token")) token = req.header("x-access-token");
+  if (req.header("x-auth-token")) token = req.header("x-auth-token");
+  if (!token) {
+    return res.json({ msg: "no token, authorization denied" });
+  }
+
+  jwt.verify(token, jwtSecret, function (error, user) {
+    if (error)
+      return res.json({
+        msg: "Error ",
+        error: error,
+      });
+    if (user) {
+      console.log(user);
+      req.user = user;
+
+      next();
+    }
+  });
+};

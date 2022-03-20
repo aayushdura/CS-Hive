@@ -1,0 +1,26 @@
+@import "./base";
+main {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.primary-title {
+  position: relative;
+  margin-top: -2ch;
+  text-align: center;
+}
+.text-muted1 {
+  color: rgb(150, 148, 140);
+  text-align: center;
+  margin-bottom: 3ch;
+}
+.form-container {
+  height: min-content;
+}
+#text-muted2 {
+  padding-top: 15px;
+  margin-bottom: -1ch;
+}

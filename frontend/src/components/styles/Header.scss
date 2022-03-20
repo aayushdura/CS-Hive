@@ -1,0 +1,34 @@
+@import "./base";
+nav {
+  display: flex;
+  height: 55px;
+  padding: 0.8em;
+  margin: 0.5%;
+  background-color: $primaryWhite;
+  align-items: center;
+  border-radius: 1em;
+  box-shadow: $boxShadow;
+  .header-navbar {
+    margin-left: auto;
+  }
+  .searchbar-navbar {
+    margin-left: auto;
+    margin-right: 7%;
+  }
+  .searchbar {
+    width: 25em;
+    height: 3em;
+    outline: none;
+  }
+  .right-div-navbar {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 2em;
+  }
+}
+input:focus {
+  outline: none;
+  border: 1px solid $primaryColor;
+}

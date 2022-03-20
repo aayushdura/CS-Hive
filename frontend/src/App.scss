@@ -1,0 +1,17 @@
+@import "./components/styles/base";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0.5%;
+  color: $primaryColor;
+  background-color: $primaryColor;
+
+  .primary-section {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    margin: 0.5%;
+  }
+}

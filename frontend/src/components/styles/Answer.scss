@@ -1,0 +1,28 @@
+@import "./base";
+.primary-section {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  .leftnav-body {
+    background-color: $primaryWhite;
+    width: 20%;
+    border-radius: 1em;
+  }
+  .routing-section {
+    padding: 0.5em;
+    background-color: $primaryWhite;
+    border-radius: 1em;
+    color: rgb(34, 33, 33);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    width: 55%;
+  }
+  .rightnav-body {
+    background-color: $primaryWhite;
+    border-radius: 1em;
+    margin-left: auto;
+    width: 25%;
+  }
+}
