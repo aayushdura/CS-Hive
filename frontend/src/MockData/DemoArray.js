@@ -5,6 +5,7 @@ export const randomArrayOfNames = [
   "Samita",
   "Rishi",
   "Harish",
+  "Sushil"
 ];
 
 export const randomArrayOfTopics = [
