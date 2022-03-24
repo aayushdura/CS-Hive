@@ -16,6 +16,7 @@ const Container = () => {
         <section className="routing-section">
           <h2>Home</h2>
           {randomTestData.map((data) => {
+            console.log(data.id);
             return <Card key={data.id} data={data} />;
           })}
         </section>

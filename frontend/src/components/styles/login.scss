@@ -6,7 +6,11 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  h3 {
+    text-align: center;
+  }
 }
+
 .form-container {
   display: flex;
   flex-direction: column;

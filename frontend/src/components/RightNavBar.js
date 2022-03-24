@@ -18,7 +18,7 @@ const RightNavBar = () => {
       <MyVerticallyCenteredModal
         show={modalShow}
         title="Ask Anything"
-        question={true}
+        questionStatus={true}
         onHide={() => setModalShow(false)}
       />
     </div>

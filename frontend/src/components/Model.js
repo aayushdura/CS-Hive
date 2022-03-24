@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import { Button } from "@mui/material";
 // import { demoAnswer } from "../MockData/DemoAnswer";
 import "./styles/Modal.scss";
 import Modal from "react-bootstrap/Modal";
@@ -9,43 +9,36 @@ import { randomTestData } from "../MockData/DemoData";
 // import { useNavigate } from "react-router";
 
 const MyVerticallyCenteredModal = (props) => {
-  const { title, question } = props;
-  const [questionString, setQuestionString] = useState("");
+  const { title, question, questionStatus, id } = props;
+  const [post, setPost] = useState({
+    id,
+    username: "",
+    question,
+    answer: [],
+    likeCount: 0,
+  });
   const [answerString, setAnswerString] = useState("");
-  const [demoAnswer, setDemoAnswer] = useState([]);
-  console.log(demoAnswer);
 
+  // const [demoAnswer, setDemoAnswer] = useState([]);
+  // console(demoAnswer);
+  const handlePostCreate = () => {};
   const handleAskAnswerSubmit = () => {
-    if (question) {
-      updateQuestion();
+    if (questionStatus) {
+      updatePost();
     } else {
       updateAnswer();
     }
   };
   const updateAnswer = () => {
-    let newAnswer = {
-      id: Date.now(),
-      username: Date.now(),
-      answer: answerString,
-      upvoteCount: parseInt(Math.random() * 1000),
-    };
-    setDemoAnswer([...demoAnswer, newAnswer]);
+    const toUpdatePost = randomTestData.find((x) => x.id === id);
+    toUpdatePost.answers.push(answerString);
     setAnswerString("");
     alert(`Answer Submitted`);
   };
-  const updateQuestion = () => {
-    // console.log(questionString);
-    randomTestData = [
-      ...randomTestData,
-      {
-        id: Date.now(),
-        username: "",
-        question: questionString,
-        answer: "",
-        upvoteCount: parseInt(Math.random() * 1000),
-      },
-    ];
-    setQuestionString("");
+  const updatePost = () => {
+    //   ...randomTestData,
+
+    setPost("");
     alert(`Question Submitted`);
   };
   // let params = new URLSearchParams();
@@ -98,19 +91,24 @@ const MyVerticallyCenteredModal = (props) => {
           <h4>{title}</h4>
         </Modal.Title>
       </Modal.Header>
-      {question ? (
+      {questionStatus ? (
         <Modal.Body>
-          <p>Hey This is the question asking section</p>
           <Form.Control
             type="text"
             placeholder="Question...?"
             className="questionbar"
-            onChange={(e) => setQuestionString(e.target.value)}
+            onChange={(e) => setPost({ question: e.target.value })}
+          />
+          <Form.Control
+            type="text"
+            placeholder="UserName...?"
+            className="questionbar"
+            onChange={(e) => setPost({ username: e.target.value })}
           />
         </Modal.Body>
       ) : (
         <Modal.Body>
-          <p>Hey This is the Answering section</p>
+          <p>{question}</p>
           <Form.Control
             as="textarea"
             placeholder="Write your own Answer ... "
@@ -123,11 +121,10 @@ const MyVerticallyCenteredModal = (props) => {
         <Button
           style={{
             backgroundColor: "aliceblue",
-            color: "rgb(62, 224, 124)",
           }}
           onClick={handleAskAnswerSubmit}
         >
-          {question ? "ASK" : "ANSWER"}
+          {questionStatus ? "ASK" : "ANSWER"}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -1,42 +1,46 @@
 import React, { useState } from "react";
 import MyVerticallyCenteredModal from "./Model";
-import { IconButton, Button } from "@mui/material";
+import { IconButton } from "@mui/material";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import "./styles/Card.scss";
 const Card = ({ data }) => {
   const [modalShow, setModalShow] = useState(false);
   const [like, setLike] = useState(0);
-  const [disLike, setDisLike] = useState(0);
+  var indexForAnswer = 1;
+  const handleAnswerPost = () => {
+    setModalShow(true);
+  };
 
   return (
     <div className="card">
       <div className="question">{data.question}</div>
-      <div className="answer">{data.answer}</div>
+      <div className="answer">
+        {/* {console.log(data.answers)} */}
+        {data?.answers?.map((answer) => {
+          return (
+            <>
+              <div className="answer">{`${indexForAnswer++}. ${answer}`}</div>
+            </>
+          );
+        })}
+      </div>
       <section>
-        <span className="like-button">
-          <IconButton color="primary" onClick={() => setLike(like + 1)}>
+        <div className="like-button">
+          <IconButton color="default" onClick={() => setLike(like + 1)}>
             <ThumbUpIcon />
           </IconButton>
           <>{like}</>
-          <IconButton color="primary" onClick={() => setDisLike(disLike + 1)}>
-            <ThumbDownIcon />
-          </IconButton>
-          <>{disLike}</>
-        </span>
+        </div>
+
         <span className="answer-button">
-          <Button
-            variant="contained"
-            style={{
-              backgroundColor: "rgb(62, 224, 124) ",
-              borderRadius: "2ch",
-            }}
-            onClick={() => setModalShow(true)}
-          >
-            Answer
-          </Button>
+          <IconButton variant="contained" onClick={handleAnswerPost}>
+            <QuestionAnswerIcon />
+          </IconButton>
           <MyVerticallyCenteredModal
             show={modalShow}
+            question={data.question}
+            id={data.id}
             title="Answer"
             // Answer={true}
             onHide={() => setModalShow(false)}

@@ -4,32 +4,24 @@ import { Link } from "react-router-dom";
 import "../components/styles/register.scss";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { baseURL } from "../baseURI";
 
 const Register = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-    userName: "",
+    username: "",
     email: "",
     password: "",
   });
 
   function handleSubmit(e) {
     e.preventDefault();
-    const params = new URLSearchParams();
-    params.append("fullName", formValues.userName);
-    params.append("email", formValues.email);
-    params.append("password", formValues.password);
-    console.log(formValues);
     axios
-      .post("http://localhost:8080/api/auth/register", params, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((result) => {
-        alert(result.data?.msg);
-        if (result.status === 201) {
-          alert(result.data?.msg);
+      .post(`${baseURL}/users`, { formValues })
+      .then((res) => {
+        alert(res.data?.msg);
+        if (res.status === 201) {
+          alert(res.data?.msg);
           navigate("/container");
         }
       })
@@ -44,14 +36,14 @@ const Register = () => {
       <Form className="form-container" onSubmit={handleSubmit}>
         <h4 className="primary-title-form">Register</h4>
         <Form.Group className="mb-3" controlId="formBasicName">
-          <Form.Label>Full Name</Form.Label>
+          <Form.Label>User Name</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter Full-Name"
+            placeholder="Enter an User Name"
             required
-            value={formValues?.userName}
+            value={formValues?.username}
             onChange={(e) => {
-              setFormValues({ ...formValues, userName: e.target.value });
+              setFormValues({ ...formValues, username: e.target.value });
             }}
           />
         </Form.Group>

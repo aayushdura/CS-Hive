@@ -9,24 +9,19 @@ import { generateRandomName } from "../MockData/DemoMethods";
 import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    params.append("fullName", formValues.userName);
-    params.append("email", formValues.email);
-    params.append("password", formValues.password);
-    // console.log(formValues);
     axios
-      .post("http://localhost:8080/api/auth/login", params, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      })
-      .then((result) => {
-        alert(result.data?.msg);
-        if (result.status === 200) {
-          alert(result.data?.msg);
-          localStorage.setItem("token", result.data.token);
+      .post("http://localhost:8080/api/login", { formValues })
+      .then((res) => {
+        alert(res.data?.msg);
+        if (res.status === 200) {
+          alert(res.data?.msg);
+          // localStorage.setItem("token", res.data.token);
           navigate("/container");
         }
       })
@@ -35,13 +30,10 @@ const Login = () => {
       });
   };
 
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
   return (
     <main>
       <Form className="form-container" onSubmit={handleSubmit}>
+        <h3>Log In</h3>
         <Avatar
           style={{
             color: "rgb(28, 36, 105)",
