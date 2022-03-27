@@ -7,23 +7,26 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
-import Explore from "./pages/Explore";
-import Answer from "./pages//Answer";
-import Topics from "./pages/Topics";
-import Container from "./pages/Container";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Landing from "./pages/Landing/Landing";
+import Explore from "./pages/Explore/Explore";
+import Answer from "./pages/Answer/Answer";
+import Topics from "./pages/Topics/Topics";
+import Container from "./pages/Timeline/Container";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 const PrivateRoute = () => {
-  return localStorage.getItem("token") ? <Outlet /> : <Navigate to="/" />;
+  return localStorage.getItem("userInfo") ? <Outlet /> : <Navigate to="/" />;
 };
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Register />}></Route>
-        <Route exact path="/login" element={<Login />}></Route>
+        <Route exact path="/" element={<Landing />} />
+
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
         <Route exact path="/explore" element={<PrivateRoute />}>
           <Route exact path="/explore" element={<Explore />} />
         </Route>

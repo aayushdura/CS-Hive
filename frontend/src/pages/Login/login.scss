@@ -1,0 +1,34 @@
+@import "../../components/styles/base";
+
+main {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  h3 {
+    text-align: center;
+  }
+  .error-display {
+    text-align: center;
+    color: red;
+    padding: 5px;
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3ch;
+  background-color: rgba(161, 158, 158, 0.445);
+  padding: 2ch;
+  width: 40%;
+  height: 40%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  #text-muted2 {
+    padding-top: 15px;
+    margin-bottom: -1ch;
+  }
+}
