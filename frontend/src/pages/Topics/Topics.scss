@@ -1,0 +1,25 @@
+@import "../../components/styles/base";
+
+.rightnavbar-container {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.routing-container {
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  gap: 50px;
+}
+.routing-component {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  border-left: 2px solid;
+  border-right: 2px solid;
+}
+.routing-component:hover {
+  background-color: $optionHover;
+}
