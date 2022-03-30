@@ -10,7 +10,7 @@ const RightNavBar = () => {
   const [modalShow, setModalShow] = useState(false);
   const [registeredUsers, setRegisteredUsers] = useState([])
   const fetchUser = async () => {
-    await axios.get(`${baseURL}/getall`).then((res) => {
+    await axios.get(`${baseURL}/users/getall`).then((res) => {
       setRegisteredUsers(res.data.users)
       console.log(res)
     }).catch((error) => console.log(error))

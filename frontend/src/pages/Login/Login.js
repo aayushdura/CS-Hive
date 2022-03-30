@@ -25,17 +25,19 @@ const Login = () => {
         },
       };
 
-      const { data } = await axios.post(`${baseURL}/login`, formValues, config);
+      const { data } = await axios.post(`${baseURL}/users/login`, formValues, config);
       localStorage.setItem("userInfo", JSON.stringify(data));
       navigate("/container");
     } catch (error) {
       console.log(error.response.data);
-      setErrorFromBackend(error.response.statusText);
+      setErrorFromBackend(error.response.data);
     }
   };
 
   return (
     <main>
+      <h1 className="primary-title">Welcome Back</h1>
+
       <Form className="form-container" onSubmit={handleSubmit}>
         <h3>Log In</h3>
         <Avatar
@@ -80,7 +82,7 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember-Me" />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button style={{ backgroundColor: "#293035" }} type="submit">
           LogIn
         </Button>
         {errorFromBackend?.length > 0 && (
@@ -88,7 +90,7 @@ const Login = () => {
         )}
         <p className="text-muted" id="text-muted2">
           Not a member{" "}
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/register" style={{ textDecoration: "none" }}>
             Register
           </Link>
         </p>

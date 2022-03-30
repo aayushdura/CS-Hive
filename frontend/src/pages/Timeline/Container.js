@@ -8,11 +8,30 @@ import LeftNavBar from "../../components/leftsection/LeftNavBar";
 import RightNavBar from "../../components/rightsection/RightNavBar";
 import "./Container.scss";
 import { randomTestData } from "../../Utils/MockData/DemoData";
+import axios from "axios";
+import { baseURL } from "../../baseURI";
 const Container = () => {
   const [userDetails, setUserDetails] = useState({});
-  const [post, setPost] = useState({});
 
+  // const [post, setPost] = useState({});
+  const fetchPosts = async () => {
+    await axios.get(`${baseURL}/posts`)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => console.log(error))
+  }
+  // const doPosts = async () => {
+  //   await axios.post(`${baseURL}/posts/createPost`, post)
+  //     .then((response) => {
+  //       console.log(response)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }
   useEffect(() => {
+    fetchPosts()
     const response = JSON.parse(localStorage.getItem("userInfo"));
     setUserDetails(response);
   }, []);
@@ -29,14 +48,15 @@ const Container = () => {
           <div className="post-creator">
             <Form.Control
               type="text"
-              placeholder={`What's that curiosity on your brain.... Dear ${userDetails?.name?.slice(0, 6)}`}
+              placeholder={`What's that curiosity on your brain.... Dear ${userDetails?.name?.slice(0, 7)}`}
               style={{ height: "8ch" }}
               className="questionbar"
-              onChange={(e) => setPost({ question: e.target.value })}
+            // onChange={(e) => setPost({ question: e.target.value })}
             />
             <Button
               variant="contained"
               style={{ backgroundColor: "black ", width: "20%", color: "white", float: "right" }}
+            // onClick={doPosts()}
             >
               Create A Post
             </Button>

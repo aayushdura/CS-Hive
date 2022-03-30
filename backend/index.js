@@ -6,6 +6,7 @@ const dotenv = require("dotenv"); //importing dotenv for using .env
 // const morgan = require("morgan");
 const cors = require("cors");
 const userRoute = require("./routes/user")
+const postRoute = require("./routes/posts")
 const connectDb = require("./config/db");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 dotenv.config();
@@ -21,7 +22,7 @@ app.use(cors());
 
 
 app.use("/api/users", userRoute); //while on route "/api/users" invoke this method useRoute()
-
+app.use("/api/posts", postRoute)
 
 
 app.use(notFound);

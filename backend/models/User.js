@@ -18,6 +18,8 @@ const userSchema = mongoose.Schema(
       require: true,
       unique: true,
     },
+
+
   },
   {
     timestamps: true,
