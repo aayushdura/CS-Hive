@@ -15,7 +15,7 @@ const Register = () => {
   });
   const [errorFromBackend, setErrorFromBackend] = useState("");
   useEffect(() => {
-    axios.get(`${baseURL}/getall`).then((res) => {
+    axios.get(`${baseURL}/users/getall`).then((res) => {
       // setRegisteredUsers(res.data)
       console.log(res.data.users)
     }).catch((error) => console.log(error))
@@ -30,7 +30,7 @@ const Register = () => {
       };
 
       const { data } = await axios.post(
-        `${baseURL}`,
+        `${baseURL}/users`,
         formValues,
         config
       );
@@ -43,8 +43,7 @@ const Register = () => {
   };
   return (
     <main>
-      <h1 className="primary-title">Welcome To CS-hive</h1>
-      <p className="text-muted1">Hive For Computer Science associates</p>
+      <h1 className="primary-title">Welcome To Collaborative-Forum</h1>
       <Form className="form-container" onSubmit={handleSubmit}>
         <h4 className="primary-title-form">Register</h4>
         <Form.Group className="mb-3" controlId="formBasicName">
@@ -89,7 +88,7 @@ const Register = () => {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember-Me" />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" style={{ backgroundColor: "#293035" }}>
           Register
         </Button>
         {errorFromBackend.length > 0 && (

@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const generateToken = require("../utils/generatetoken");
 
@@ -40,7 +40,7 @@ exports.loginUser = async (req, res) => {
 
   if (user && (await user.matchPassword(password))) {
     generateToken;
-    res.status(201).json({
+    res.status(200).json({
       _id: user.id,
       name: user.username,
       email: user.email,

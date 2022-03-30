@@ -15,7 +15,7 @@ const Header = ({ username }) => {
           to="/container"
           style={{ textDecoration: "none", color: "black" }}
         >
-          <h2>CS-HIVE</h2>
+          <h2>COLLABORATIVE-FORUM</h2>
         </Link>
       </div>
       <div className="searchbar-navbar">
@@ -40,7 +40,7 @@ const Header = ({ username }) => {
             <Button
               onClick={() => {
                 localStorage.clear();
-                navigate("/login");
+                navigate("/");
               }}
             >
               LogOut
