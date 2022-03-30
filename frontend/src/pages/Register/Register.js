@@ -30,7 +30,7 @@ const Register = () => {
       };
 
       const { data } = await axios.post(
-        `${baseURL}`,
+        `${baseURL}/users`,
         formValues,
         config
       );
