@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-// import { demoAnswer } from "../MockData/DemoAnswer";
 import "./Modal.scss";
 import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { randomTestData } from "../../Utils/MockData/DemoData";
-// import axios from "axios";
-// import { useNavigate } from "react-router";
+import axios from "axios";
+import moment from "moment";
+import { baseURL } from "../../baseURI";
 
 const MyVerticallyCenteredModal = (props) => {
   const { title, question, questionStatus, id } = props;
@@ -17,10 +17,16 @@ const MyVerticallyCenteredModal = (props) => {
     answer: [],
     likeCount: 0,
   });
+  const [userDetails, setUserDetails] = useState({});
+  useEffect(() => {
+
+    const response = JSON.parse(localStorage.getItem("userInfo"));
+    setUserDetails(response);
+  }, []);
   const [answerString, setAnswerString] = useState("");
 
-  // const [demoAnswer, setDemoAnswer] = useState([]);
-  // console(demoAnswer);
+
+
   const handleAskAnswerSubmit = () => {
     if (questionStatus) {
       updatePost();
@@ -34,11 +40,19 @@ const MyVerticallyCenteredModal = (props) => {
     setAnswerString("");
     alert(`Answer Submitted`);
   };
-  const updatePost = () => {
-    //   ...randomTestData,
+  const updatePost = async () => {
+    await axios.post(`${baseURL}/posts/create`, post)
+      .then((response) => {
+        alert("Question Posted");
+        const newPost = response?.data?.question
+        randomTestData.unshift({ id: response?.data?._id, username: userDetails?.name, question: newPost, answers: [], date: moment().startOf("now").fromNow() })
+        setPost()
 
-    setPost("");
-    alert(`Question Submitted`);
+      })
+      .catch((error) => {
+        console.log(error)
+        setPost("");
+      })
   };
 
   return (
@@ -61,12 +75,7 @@ const MyVerticallyCenteredModal = (props) => {
             className="questionbar"
             onChange={(e) => setPost({ question: e.target.value })}
           />
-          <Form.Control
-            type="text"
-            placeholder="UserName...?"
-            className="questionbar"
-            onChange={(e) => setPost({ username: e.target.value })}
-          />
+
         </Modal.Body>
       ) : (
         <Modal.Body>
@@ -75,7 +84,7 @@ const MyVerticallyCenteredModal = (props) => {
             as="textarea"
             placeholder="Write your own Answer ... "
             className="answerbar"
-            onChange={(e) => setAnswerString(e.target.value)}
+            onChange={(e) => setAnswerString(`${e.target.value}?`)}
           />
         </Modal.Body>
       )}

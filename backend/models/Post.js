@@ -4,7 +4,7 @@ const postSchema = mongoose.Schema(
     {
         question: {
             type: String,
-            require: false,
+            require: true,
 
         },
         answer: {
@@ -13,11 +13,11 @@ const postSchema = mongoose.Schema(
         },
         category: {
             type: String,
-            required: true,
+            required: false,
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            require: true,
+            require: false,
             ref: "User"
         }
 

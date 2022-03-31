@@ -3,7 +3,7 @@ import "./userlist.scss";
 const UserList = ({ user }) => {
   return (
     <>
-      <div className="user-list-item">{user.username}<br />{user.email}</div>
+      <div className="user-list-item">{user.username}</div>
 
 
     </>

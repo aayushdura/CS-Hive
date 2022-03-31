@@ -5,6 +5,8 @@ import LeftNavBar from "../../components/leftsection/LeftNavBar";
 import RightNavBar from "../../components/rightsection/RightNavBar";
 import "./Topics.scss";
 import { randomArrayOfTopics } from "../../Utils/MockData/DemoArray";
+
+
 // import { randomTestData } from "../MockData/DemoData";
 
 const Topics = () => {
@@ -13,6 +15,7 @@ const Topics = () => {
     const response = JSON.parse(localStorage.getItem("userInfo"));
     setUserDetails(response);
   }, []);
+
 
   return (
     <>
@@ -23,15 +26,17 @@ const Topics = () => {
         </div>
         <section className="routing-section">
           <h2>Topics</h2>
-          <aside className="routing-container">
+          <div className="routing-container">
             {randomArrayOfTopics.map((data) => {
               return (
+
                 <span key={Math.random()} className="routing-component">
-                  {data}
-                </span>
+                  {data}</span>
+
+
               );
             })}
-          </aside>
+          </div>
         </section>
         <div className="rightnav-body">
           <RightNavBar />

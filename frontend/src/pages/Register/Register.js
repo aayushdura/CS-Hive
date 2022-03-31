@@ -28,7 +28,6 @@ const Register = () => {
           "Content-type": "application/json",
         },
       };
-
       const { data } = await axios.post(
         `${baseURL}/users`,
         formValues,

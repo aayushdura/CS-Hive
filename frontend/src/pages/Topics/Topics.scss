@@ -16,8 +16,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+ justify-content:center;
   padding: 5px;
-  border-left: 2px solid;
+   border-left: 2px solid;
   border-right: 2px solid;
 }
 .routing-component:hover {

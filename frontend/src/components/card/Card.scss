@@ -7,6 +7,7 @@
   margin-bottom: 2%;
   box-shadow: $boxShadow2;
   text-align: left;
+  min-height:2.5in ;
   .question {
     font-weight: bold;
     margin-bottom: 2%;
@@ -16,6 +17,7 @@
     color: rgb(54, 52, 52);
     font-family: "Times New Roman", Times, serif;
     margin-bottom: 1%;
+    min-height: 0.8in;
   }
   .username {
     border-top: 1px solid darkgrey;
