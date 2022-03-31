@@ -22,7 +22,7 @@ const Answer = () => {
         <div className="routing-section">
           <h2>Answers</h2>
           {demoAnswer.reverse().map((data) => {
-            return <Card key={data.id} data={data} />;
+            return <Card key={data.id} post={data} />;
           })}
         </div>
         <div className="rightnav-body">
