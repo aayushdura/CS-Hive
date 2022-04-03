@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { baseURL } from "../../baseURI";
+import { baseURL } from "../../Utils/baseURI";
 
 const Register = () => {
   const navigate = useNavigate();

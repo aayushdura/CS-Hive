@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { randomArrayOfNames } from "../../Utils/MockData/DemoArray";
 import { generateRandomName } from "../../Utils/MockData/DemoMethods";
 import axios from "axios";
-import { baseURL } from "../../baseURI";
+import { baseURL } from "../../Utils/baseURI";
 const Login = () => {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({

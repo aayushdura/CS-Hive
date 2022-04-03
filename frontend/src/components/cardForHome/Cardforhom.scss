@@ -1,0 +1,56 @@
+@import "../styles/base";
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10%;
+  padding: 4%;
+  box-shadow: $boxShadow2;
+  text-align: left;
+  min-height:2.2in ;
+  .question {
+    font-weight: bold;
+    margin-bottom: 2%;
+  }
+  .answer-wrapper{
+.answer {
+    margin-left: 2%;
+    color: rgb(54, 52, 52);
+    font-family: "Times New Roman", Times, serif;
+    min-height: 0.4in;
+  }
+  }
+  
+  .username {
+    border-top: 1px solid darkgrey;
+    font-size: small;
+    text-align: center;
+    margin-bottom: -18px;
+  }
+  // .actual-username {
+  //   font-style: italic;
+  //   font-weight: bold;
+  //   color: $primaryColor2;
+  //   margin-right: 2%;
+  // }
+  .actual-date {
+    color: darkgrey;
+  }
+  section {
+    display: flex;
+    flex-direction: row;
+    gap: 70%;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    .like-button {
+      margin: auto;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: min-content;
+    }
+    .answer-button {
+      justify-content: end;
+      width: min-content;
+    }
+  }
+}

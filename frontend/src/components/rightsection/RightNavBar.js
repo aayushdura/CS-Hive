@@ -3,21 +3,18 @@ import "./RightNavBar.scss";
 import Button from "@mui/material/Button";
 import MyVerticallyCenteredModal from "../modal/Model";
 import UserList from "../userlist/UserList";
-import axios from "axios";
-import { baseURL } from "../../baseURI";
+import { fetchUsers } from "../../features/userSlice"
+import { useDispatch, useSelector } from "react-redux"
 
 const RightNavBar = () => {
-  const [modalShow, setModalShow] = useState(false);
-  const [registeredUsers, setRegisteredUsers] = useState([])
-  const fetchUser = async () => {
-    await axios.get(`${baseURL}/users/getall`).then((res) => {
-      setRegisteredUsers(res.data.users)
-      console.log(res)
-    }).catch((error) => console.log(error))
-  }
+
+  const dispatch = useDispatch()
   useEffect(() => {
-    fetchUser()
-  }, [])
+    dispatch(fetchUsers)
+  }, [dispatch])
+  const [modalShow, setModalShow] = useState(false);
+  const registeredUsers = useSelector((state) => state.user.userLists)
+  console.log(registeredUsers)
   return (
     <div className="rightnavbar-container">
       <Button
@@ -37,6 +34,7 @@ const RightNavBar = () => {
 
       <>
         {registeredUsers.map((user) => {
+          console.log("userfrom map", user)
           return <UserList user={user} key={user._id} />
         })}
       </>

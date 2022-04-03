@@ -7,17 +7,18 @@ const postSchema = mongoose.Schema(
             require: true,
 
         },
-        answer: {
-            type: String,
+        answer: [{
+            type: mongoose.Schema.Types.ObjectId,
             require: false,
-        },
+            ref: "Answer"
+        }],
         category: {
             type: String,
             required: false,
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            require: false,
+            require: true,
             ref: "User"
         }
 

@@ -6,7 +6,7 @@ import Header from "../../components/headerNavbar/Header";
 import LeftNavBar from "../../components/leftsection/LeftNavBar";
 import RightNavBar from "../../components/rightsection/RightNavBar";
 import "./Explore.scss";
-import { randomTestData } from "../../Utils/MockData/DemoData";
+import { randomTestData } from "../../Utils/MockData/DemoDatUser2";
 
 const Explore = () => {
   const [userDetails, setUserDetails] = useState({});

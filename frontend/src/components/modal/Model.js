@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@mui/material";
 import "./Modal.scss";
 import Modal from "react-bootstrap/Modal";
@@ -6,27 +6,18 @@ import { Form } from "react-bootstrap";
 import { randomTestData } from "../../Utils/MockData/DemoData";
 import axios from "axios";
 import moment from "moment";
-import { baseURL } from "../../baseURI";
+import { baseURL } from "../../Utils/baseURI";
 
 const MyVerticallyCenteredModal = (props) => {
-  const { title, question, questionStatus, id } = props;
+  const { title, questionStatus, question, singlePost, userId } = props;
   const [post, setPost] = useState({
-    id,
+    id: singlePost?._id,
     username: "",
-    question,
+    question: "",
     answer: [],
     likeCount: 0,
   });
-  const [userDetails, setUserDetails] = useState({});
-  useEffect(() => {
-
-    const response = JSON.parse(localStorage.getItem("userInfo"));
-    setUserDetails(response);
-  }, []);
   const [answerString, setAnswerString] = useState("");
-
-
-
   const handleAskAnswerSubmit = () => {
     if (questionStatus) {
       updatePost();
@@ -34,18 +25,17 @@ const MyVerticallyCenteredModal = (props) => {
       updateAnswer();
     }
   };
-  const updateAnswer = () => {
-    const toUpdatePost = randomTestData.find((x) => x.id === id);
-    toUpdatePost.answers.push(answerString);
-    setAnswerString("");
-    alert(`Answer Submitted`);
+  const updateAnswer = async () => {
+    await axios.post(`${baseURL}/answer/create`, { question: singlePost?._id, user: userId, answer: answerString }).then((response) => {
+      console.log(response);
+    })
   };
   const updatePost = async () => {
     await axios.post(`${baseURL}/posts/create`, post)
       .then((response) => {
         alert("Question Posted");
         const newPost = response?.data?.question
-        randomTestData.unshift({ id: response?.data?._id, username: userDetails?.name, question: newPost, answers: [], date: moment().startOf("now").fromNow() })
+        randomTestData.unshift({ id: response?.data?._id, username: "", question: newPost, answers: [], date: moment().startOf("now").fromNow() })
         setPost()
 
       })
@@ -54,7 +44,6 @@ const MyVerticallyCenteredModal = (props) => {
         setPost("");
       })
   };
-
   return (
     <Modal
       {...props}
@@ -73,7 +62,7 @@ const MyVerticallyCenteredModal = (props) => {
             type="text"
             placeholder="Question...?"
             className="questionbar"
-            onChange={(e) => setPost({ question: e.target.value })}
+            onChange={(e) => setPost(`{ question: e.target.value } ?`)}
           />
 
         </Modal.Body>
@@ -84,7 +73,7 @@ const MyVerticallyCenteredModal = (props) => {
             as="textarea"
             placeholder="Write your own Answer ... "
             className="answerbar"
-            onChange={(e) => setAnswerString(`${e.target.value}?`)}
+            onChange={(e) => setAnswerString(e.target.value)}
           />
         </Modal.Body>
       )}
@@ -103,3 +92,14 @@ const MyVerticallyCenteredModal = (props) => {
 };
 
 export default MyVerticallyCenteredModal;
+// await axios.post(`${baseURL}/answer/create`, {})
+  //     .then((response) => {
+  //       alert("Answer Posted");
+  //       const newAnswer = response?.data?.answer
+  //       randomTestData.unshift({ id: response?.data?._id, username: userDetails?.name, question:"", answers: answers.unshift(newAnswer), date: moment().startOf("now").fromNow() })
+
+  //     })
+  // .catch((error) => {
+  //   console.log(error)
+  //   setAnswerString("");
+  // })

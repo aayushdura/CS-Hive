@@ -7,6 +7,7 @@ import LeftNavBar from "../../components/leftsection/LeftNavBar";
 import RightNavBar from "../../components/rightsection/RightNavBar";
 const Answer = () => {
   const [userDetails, setUserDetails] = useState({});
+
   useEffect(() => {
     const response = JSON.parse(localStorage.getItem("userInfo"));
     setUserDetails(response);
